@@ -9,7 +9,7 @@ from pages.wiki_page import WikiPage
 
 URL = 'https://en.wikipedia.org/wiki/Programming_languages_used_in_most_popular_websites'
 
-load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+logo_image = (By.XPATH, "//img[@class='mw-logo-icon']")
 
 
 @pytest.fixture(scope='function')
@@ -25,7 +25,7 @@ def driver():
 @pytest.fixture()
 def open_and_load_wiki_page(driver, wait):
     driver.get(URL)
-    wait.until_not(EC.presence_of_element_located(load_div))
+    wait.until(EC.presence_of_element_located(logo_image))
     yield WikiPage(driver)
 
 
